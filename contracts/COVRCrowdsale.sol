@@ -53,6 +53,7 @@ contract COVRCrowdsale is CappedCrowdSale, RefundableCrowdSale {
       uint256 tokensThatWillBeMintedAfterPurchase = msg.value.mul(rate);
       if ((stage == CrowdsaleStage.PreICO) && (token.totalSupply() + tokensThatWillBeMintedAfterPurchase > totalTokensForSaleDuringPreICO)) {
         msg.sender.transfer(msg.value);
+        // maybe use revert() instead???
         EthRefunded("PreICO Limit Hit");
         return;
       }
@@ -67,7 +68,7 @@ contract COVRCrowdsale is CappedCrowdSale, RefundableCrowdSale {
   function forwardFunds() internal {
     if (stage == CrowdsaleStage.PreICO) {
       wallet.transfer(msg.value);
-      EthTransferred("Forwarding funds to wallet");
+      EthTransferred("Forwarding funds to pre-sale wallet");
     } else if (stage == CrowdsaleStage.ICO) {
       EthTransferred("Fowarding funds to wallet");
       super.forwardFunds();
