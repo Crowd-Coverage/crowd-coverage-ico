@@ -69,7 +69,7 @@ contract COVRCrowdsale is CappedCrowdSale, RefundableCrowdSale {
       wallet.transfer(msg.value);
       EthTransferred("Forwarding funds to wallet");
     } else if (stage == CrowdsaleStage.ICO) {
-      EthTransferred("Fowarding funds to refundable wallet");
+      EthTransferred("Fowarding funds to wallet");
       super.forwardFunds();
     }
   }
