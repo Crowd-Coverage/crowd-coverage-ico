@@ -2,6 +2,7 @@ pragma solidity ^0.4.18;
 
 import './COVRToken.sol';
 import 'zeppelin-solidity/contracts/crowdsale/CappedCrowdsale.sol';
+import 'zeppelin-solidity/contracts/crowdsale/FinalizableCrowdsale.sol';
 
 contract COVRCrowdsale is CappedCrowdSale {
   enum CrowdsaleStage {PreICO, ICO}
