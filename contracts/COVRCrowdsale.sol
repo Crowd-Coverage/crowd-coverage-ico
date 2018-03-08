@@ -18,7 +18,7 @@ contract COVRCrowdsale is CappedCrowdSale {
 
   event EthTransferred (string text);
 
-  function covrCrowdSale(uint _startTime, uint _endTime, uint _rate, address _wallet, uint _goal, uint _cap) CappedCrowdsale(_cap) FinalizableCrowdsale() RefundableCrowdsale(_goal) Crowdsale(_startTime, _endTime, _rate, _wallet) public {
+  function covrCrowdSale(uint _startTime, uint _endTime, uint _rate, address _wallet, uint _goal, uint _cap) CappedCrowdsale(_cap) FinalizableCrowdsale() FinalizableCrowdsale(_goal) Crowdsale(_startTime, _endTime, _rate, _wallet) public {
     require(_goal <= _cap);
   }
 
