@@ -2,9 +2,8 @@ pragma solidity ^0.4.18;
 
 import './COVRToken.sol';
 import 'zeppelin-solidity/contracts/crowdsale/CappedCrowdsale.sol';
-import 'zeppelin-solidity/contracts/crowdsale/RefundableCrowdsale.sol';
 
-contract COVRCrowdsale is CappedCrowdSale, RefundableCrowdSale {
+contract COVRCrowdsale is CappedCrowdSale {
   enum CrowdsaleStage {PreICO, ICO}
   CrowdsaleStage public stage = CrowdsaleStage.PreICO;
 
@@ -18,9 +17,8 @@ contract COVRCrowdsale is CappedCrowdSale, RefundableCrowdSale {
   uint public totalWeiRaisedDuringPreICO;
 
   event EthTransferred (string text);
-  event EthRefunded (string text);
 
-  function COVRCrowdSale(uint _startTime, uint _endTime, uint _rate, address _wallet, uint _goal, uint _cap) CappedCrowdsale(_cap) FinalizableCrowdsale() RefundableCrowdsale(_goal) Crowdsale(_startTime, _endTime, _rate, _wallet) public {
+  function covrCrowdSale(uint _startTime, uint _endTime, uint _rate, address _wallet, uint _goal, uint _cap) CappedCrowdsale(_cap) FinalizableCrowdsale() RefundableCrowdsale(_goal) Crowdsale(_startTime, _endTime, _rate, _wallet) public {
     require(_goal <= _cap);
   }
 
@@ -53,8 +51,6 @@ contract COVRCrowdsale is CappedCrowdSale, RefundableCrowdSale {
       uint256 tokensThatWillBeMintedAfterPurchase = msg.value.mul(rate);
       if ((stage == CrowdsaleStage.PreICO) && (token.totalSupply() + tokensThatWillBeMintedAfterPurchase > totalTokensForSaleDuringPreICO)) {
         msg.sender.transfer(msg.value);
-        // maybe use revert() instead???
-        EthRefunded("PreICO Limit Hit");
         return;
       }
 
