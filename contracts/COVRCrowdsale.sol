@@ -5,7 +5,7 @@ import 'zeppelin-solidity/contracts/crowdsale/CappedCrowdsale.sol';
 import 'zeppelin-solidity/contracts/crowdsale/FinalizableCrowdsale.sol';
 
 contract COVRCrowdsale is CappedCrowdSale {
-  enum CrowdsaleStage {PreICO, ICO}
+  enum CrowdsaleStage {PreICO, ICO2, ICO3, ICO4, ICO5}
   CrowdsaleStage public stage = CrowdsaleStage.PreICO;
 
   uint public maxTokens = 400000000000000000000000000;
@@ -39,9 +39,15 @@ contract COVRCrowdsale is CappedCrowdSale {
     stage = _stage;
 
     if (stage == CrowdsaleStage.PreICO) {
-      setCurrentRate(6); // This will change before test
-    } else if (stage == CrowdsaleStage.ICO) {
-      setCurrentRate(3); // This will change before test
+      setCurrentRate(80000); 
+    } else if (stage == CrowdsaleStage.ICO2) {
+      setCurrentRate(60000);
+    } else if (stage == CrowdsaleStage.ICO3) {
+      setCurrentRate(50000);
+    } else if (stage == CrowdsaleStage.ICO4) {
+      setCurrentRate(45000);
+    } else if (stage == CrowdsaleStage.ICO5) {
+      setCurrentRate(40000); // This will change before test
     }
   }
     function setCurrentRate(uint _rate) private {
@@ -63,13 +69,9 @@ contract COVRCrowdsale is CappedCrowdSale {
   }
 
   function forwardFunds() internal {
-    if (stage == CrowdsaleStage.PreICO) {
       wallet.transfer(msg.value);
-      EthTransferred("Forwarding funds to pre-sale wallet");
-    } else if (stage == CrowdsaleStage.ICO) {
       EthTransferred("Fowarding funds to wallet");
       super.forwardFunds();
-    }
   }
 
   function finishMint(address _teamFund, address _bountyFund, address _advisorFund, address _reserveFund) public {
