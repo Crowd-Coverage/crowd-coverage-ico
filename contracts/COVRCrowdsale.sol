@@ -47,7 +47,7 @@ contract COVRCrowdsale is CappedCrowdSale {
     } else if (stage == CrowdsaleStage.ICO4) {
       setCurrentRate(45000);
     } else if (stage == CrowdsaleStage.ICO5) {
-      setCurrentRate(40000); // This will change before test
+      setCurrentRate(40000);
     }
   }
     function setCurrentRate(uint _rate) private {
