@@ -56,7 +56,8 @@ contract COVRCrowdsale is CappedCrowdSale {
 
     function () external payable {
       uint256 tokensThatWillBeMintedAfterPurchase = msg.value.mul(rate);
-      if ((stage == CrowdsaleStage.PreICO) && (token.totalSupply() + tokensThatWillBeMintedAfterPurchase > totalTokensForSaleDuringPreICO)) {
+      if ((stage == CrowdsaleStage.PreICO) && 
+      (token.totalSupply() + tokensThatWillBeMintedAfterPurchase > totalTokensForSaleDuringPreICO)) {
         msg.sender.transfer(msg.value);
         return;
       }
